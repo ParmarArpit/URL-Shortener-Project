@@ -1,8 +1,7 @@
 const express = require("express")
+const {handleSignUp, handleLogin} = require("../controller/user")
 const userRouter = express.Router()
 
-userRouter.get("/", (req, res) => {
-    res.end("This is home page of Url shortener front-end will be updated soon")
-
-})
+userRouter.post("/signup",handleSignUp)
+userRouter.post("/login",handleLogin)
 module.exports = userRouter
