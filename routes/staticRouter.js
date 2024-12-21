@@ -1,5 +1,5 @@
 const express = require("express")
-const {handleHomePage} = require("../controller/url")
+const { handleHomePage } = require("../controller/url")
 const { handleSignUpPage, handleLoginPage } = require("../controller/user")
 const staticRouter = express.Router()
 

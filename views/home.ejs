@@ -19,46 +19,46 @@
 <body>
     <h1>Url shortner</h1>
     <%= Name %>
-    <div style="margin-top:20px ;">
-        <form action="/url" method="POST">
-            <label> Enter original url :
-            </label>
-            <input type="text" name="url" placeholder="example.com">
-            <button type="submit">Generate Short Url </button>
-        </form>
-    </div>
-    <div>
-        <% if (locals.allUrls) { %>
-            <table>
-                <thead>
-                    <tr>
-                        <th class="thpadding">Sno</th>
-                        <th class="thpadding">Original Url</th>
-                        <th class="thpadding">Redirect Url</th>
-                        <th class="thpadding">Clicks</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% allUrls.forEach((url, index)=> { %>
+        <div style="margin-top:20px ;">
+            <form action="/url" method="POST">
+                <label> Enter original url :
+                </label>
+                <input type="text" name="url" placeholder="example.com">
+                <button type="submit">Generate Short Url </button>
+            </form>
+        </div>
+        <div>
+            <% if (locals.allUrls) { %>
+                <table>
+                    <thead>
                         <tr>
-                            <td class="thpadding">
-                                <%= index + 1 %>
-                            </td>
-                            <td class="thpadding">
-                                <%= url.redirectUrl %>
-                            </td>
-                            <td class="thpadding">
-                                <%= `http://localhost:8001/url/${url.shortId}` %>
-                            </td>
-                            <td class="thpadding">
-                                <%= url.visitHistory.length %>
-                            </td>
+                            <th class="thpadding">Sno</th>
+                            <th class="thpadding">Original Url</th>
+                            <th class="thpadding">Redirect Url</th>
+                            <th class="thpadding">Clicks</th>
                         </tr>
-                        <% }) %>
-                </tbody>
-            </table>
-            <% } %>
-    </div>
+                    </thead>
+                    <tbody>
+                        <% allUrls.forEach((url, index)=> { %>
+                            <tr>
+                                <td class="thpadding">
+                                    <%= index + 1 %>
+                                </td>
+                                <td class="thpadding">
+                                    <%= url.redirectUrl %>
+                                </td>
+                                <td class="thpadding">
+                                    <%= `http://localhost:8001/url/${url.shortId}` %>
+                                </td>
+                                <td class="thpadding">
+                                    <%= url.visitHistory.length %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } %>
+        </div>
 </body>
 
 </html>

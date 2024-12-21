@@ -8,7 +8,7 @@ async function handleSignUp(req, res) {
         email,
         password
     })
-    res.render("home")  // !
+    res.render("login")  // !
 
 }
 async function handleLogin(req, res) {
@@ -18,9 +18,8 @@ async function handleLogin(req, res) {
         password
     })
     if (!user) return res.redirect("/login")
-    const sessionID = uuidv4();
-    setUser(sessionID, user);
-    res.cookie("uid", sessionID);
+    const token = setUser(user)
+    res.cookie("uid", token);
     res.redirect("/home")
 
 }

@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
 //Registering Routes ;
-app.use("/url", restrictToLoggedInUserOnly,urlRouter);
+app.use("/url",restrictToLoggedInUserOnly,urlRouter);
 app.use("/user",userRouter);
 app.use("/",checkAuth, staticRouter);
 
