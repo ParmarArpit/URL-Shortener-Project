@@ -5,7 +5,7 @@ const userRouter = require("./routes/user");
 const urlRouter = require("./routes/url");
 const staticRouter = require("./routes/staticRouter");
 const cookieParser = require("cookie-parser");
-const { restrictToLoggedInUserOnly, checkAuth } = require("./middlewares/auth");
+const { checkForAuthentication, restrictTo } = require("./middlewares/auth");
 require("dotenv").config();
 const app = express();
 const PORT = 8001;
@@ -19,11 +19,12 @@ connectToMongoDB(MONGO_URI)
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
+app.use(checkForAuthentication)
 
 //Registering Routes ;
-app.use("/url",restrictToLoggedInUserOnly,urlRouter);
+app.use("/url",restrictTo(["NORMAL"]),urlRouter);
 app.use("/user",userRouter);
-app.use("/",checkAuth, staticRouter);
+app.use("/",staticRouter);
 
 //Specifying view engine 
 app.set("view engine", "ejs");

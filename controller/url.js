@@ -51,8 +51,18 @@ async function handleHomePage(req, res) {
     try {
         // const userId = new mongoose.Types.ObjectId(req.user.id); // Convert id to ObjectId
         const urls = await URL.find({ createdBy: req.user.id });
-        console.log("User:", req.user);
-        console.log("URLs:", urls);
+        return res.render("home", { allUrls: urls, Name: req.user.Name });
+    } catch (err) {
+        console.error("Error fetching URLs:", err);
+        res.redirect("login");
+    }
+}
+
+async function handleAdminPage(req,res){
+    if (!req.user) return res.redirect("login");
+    try {
+        // const userId = new mongoose.Types.ObjectId(req.user.id); // Convert id to ObjectId
+        const urls = await URL.find({ });
         return res.render("home", { allUrls: urls, Name: req.user.Name });
     } catch (err) {
         console.error("Error fetching URLs:", err);
@@ -63,5 +73,6 @@ module.exports = {
     handleShortIDGeneration,
     handleRedirect,
     handleAnalytics,
-    handleHomePage
+    handleHomePage,
+    handleAdminPage
 }

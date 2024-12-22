@@ -17,9 +17,14 @@ async function handleLogin(req, res) {
         email,
         password
     })
+    console.log("user found : ",user);
+    
     if (!user) return res.redirect("/login")
     const token = setUser(user)
-    res.cookie("uid", token);
+    
+    res.cookie("authToken", token)
+    console.log("token sent : ",token);
+    
     res.redirect("/home")
 
 }
